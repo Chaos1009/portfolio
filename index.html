@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jiayi Pan</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="top-nav">
+    <div class="nav-container">
+      <h1>Jiayi Pan</h1>
+      <nav>
+        <ul>
+          <li><a href="#about" class="active">About</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact Me</a></li>
+          <li><a href="#cv">CV</a></li>
+        </ul>
+        <div class="nav-underline"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section id="about">
+      <div class="container about-layout">
+        <div class="photo-stack" aria-label="Photo highlights">
+          <img class="p1" src="images/about1.jpg" alt="About photo 1">
+          <img class="p2" src="images/about2.jpg" alt="About photo 2">
+          <img class="p3" src="images/about3.jpg" alt="About photo 3">
+        </div>
+        <div class="about-text">
+          <h2>About</h2>
+          <p>Hello! I'm <strong>Jiayi Pan</strong>, a gameplay and systems-focused engineer specializing in game prototyping, tools, and iterative system design.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="timeline-section">
+      <div class="container">
+        <h2>Education</h2>
+        <div class="edu-timeline" aria-label="Education timeline">
+          <div class="edu-item edu-scu">
+            <div class="edu-dot"></div>
+            <div class="edu-card">
+              <h3>Sichuan University</h3>
+              <p class="edu-meta">B.S. in Computer Science · 2023 – 2025</p>
+              <p class="edu-desc"><strong>GPA 3.92/4.0</strong></p>
+            </div>
+          </div>
+          <div class="edu-item edu-usc">
+            <div class="edu-dot"></div>
+            <div class="edu-card">
+              <h3>University of Southern California</h3>
+              <p class="edu-meta">B.S. in Computer Science Games · 2025 – Present</p>
+              <p class="edu-desc"><strong>GPA 4.0/4.0</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="publications">
+      <div class="container">
+        <h2>Publications</h2>
+        <div class="pub-card">
+          <h3>
+            Blood Biomarker-Based Machine Learning Triaging Model for Predicting the Risk of Cognitive Decline Progression from Mild Cognitive Impairment
+          </h3>
+          <p class="pub-authors">
+            Yin, J., Yu, X., <strong>Pan, J.</strong>, Qian, G. (2025)
+          </p>
+          <p class="pub-venue">
+            2025 IEEE 2nd International Conference on Deep Learning and Computer Vision (DLCV), Jinan, China, 2025, pp. 1–5.
+          </p>
+          <p class="pub-desc">
+            This paper proposes a blood biomarker-based machine learning triaging model to predict the risk of cognitive decline progression from mild cognitive impairment (MCI).
+          </p>
+          <div class="pub-actions">
+            <a class="pub-btn" href="https://ieeexplore.ieee.org/document/11088776" target="_blank" rel="noopener noreferrer">
+              View Paper
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+      <div class="projects-wrapper">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          
+          <button class="project-card" data-target="project-nudge">
+            <div class="project-top">
+              <h3>Nudge</h3>
+              <span class="project-badge">Game · Ongoing</span>
+            </div>
+            <p class="project-role">Game Engineer / Research Prototyper</p>
+            <p class="project-desc">Built modular gameplay systems in Unity, reusable prefabs, and iterated through playtesting.</p>
+            <div class="project-tags">
+              <span>Unity</span><span>Systems</span><span>Prototyping</span>
+            </div>
+          </button>
+
+          <button class="project-card" data-target="project-lamplighter">
+            <div class="project-top">
+              <h3>LampLighter</h3>
+              <span class="project-badge">GameJam · Oct 2024</span>
+            </div>
+            <p class="project-role">Gameplay & UI Prototyper</p>
+            <p class="project-desc">Prototyped gameplay flow, UI systems, and levels with strong onboarding and feedback clarity.</p>
+            <div class="project-tags">
+              <span>UI</span><span>Level Design</span><span>Rapid Iteration</span>
+            </div>
+          </button>
+
+          <button class="project-card" data-target="project-sushirat">
+            <div class="project-top">
+              <h3>SushiRat Revolution</h3>
+              <span class="project-badge">Tabletop · 2025</span>
+            </div>
+            <p class="project-role">Game Designer / Systems</p>
+            <p class="project-desc">Spatial movement + resource competition with strong risk-reward tradeoffs and tactical choices.</p>
+            <div class="project-tags">
+              <span>Spatial</span><span>Economy</span><span>Balance</span>
+            </div>
+          </button>
+
+          <button class="project-card" data-target="project-monstory">
+            <div class="project-top">
+              <h3>Monstory</h3>
+              <span class="project-badge">Tabletop · 2025</span>
+            </div>
+            <p class="project-role">Narrative Systems Designer</p>
+            <p class="project-desc">Collaborative storytelling using hidden prompts and constrained language mechanics.</p>
+            <div class="project-tags">
+              <span>Narrative</span><span>Prompts</span><span>Collaboration</span>
+            </div>
+          </button>
+
+          <button class="project-card" data-target="project-alchemist">
+            <div class="project-top">
+              <h3>Untitled Alchemist Simulator</h3>
+              <span class="project-badge">Tabletop · 2025</span>
+            </div>
+            <p class="project-role">Systems Researcher</p>
+            <p class="project-desc">Economy-driven auctions + action points with multiple win conditions and strategic planning.</p>
+            <div class="project-tags">
+              <span>Auctions</span><span>Economy</span><span>Strategy</span>
+            </div>
+          </button>
+
+          <button class="project-card project-coming" data-target="project-coming">
+            <div class="project-top">
+              <h3>More Projects</h3>
+              <span class="project-badge">Ongoing</span>
+            </div>
+            <p class="project-role">In progress…</p>
+            <p class="project-desc">I’m actively building new prototypes & tools. Updates will be added here soon.</p>
+            <div class="project-tags">
+              <span>Prototype</span><span>Tools</span><span>New Work</span>
+            </div>
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+        <!-- Nudge!! -->>
+        <section id="project-nudge" class="project-detail">
+            <div class="container">
+                <button class="back-btn" data-back>← Back to Projects</button>
+
+                <div class="detail-layout">
+                <div class="detail-content">
+                    <h2>Nudge (USC Games MFA Capstone)</h2>
+                    <p class="detail-meta">Game Engineer / Research Prototyper · Ongoing</p>
+                    
+                    <p class="detail-text">
+                    Built robust gameplay systems focused on precision and player feedback. 
+                    Implemented <strong>pixel-perfect colliders</strong> for all prefabs to ensure highly accurate physics interactions and collision detection.
+                    </p>
+
+                    <h3 class="detail-subtitle">Key Engineering Contributions</h3>
+                    <ul class="detail-list">
+                    <li>
+                        <strong>Physics & Interaction:</strong> Generated pixel-perfect 2D colliders for all asset prefabs, ensuring precise gameplay mechanics.
+                    </li>
+                    <li>
+                        <strong>Tools Development:</strong> Developed a dedicated <strong>Screenshot Mode</strong> feature, allowing for high-resolution capture and camera control.
+                    </li>
+                    <li>
+                        <strong>Audio Systems:</strong> Integrated comprehensive audio functionality using <strong>FMOD</strong>, handling all SFX events and dynamic music playback.
+                    </li>
+                    </ul>
+                </div>
+
+                <div class="detail-stack" aria-label="Nudge screenshots">
+                    <img class="d1" src="images/nudge1.jpg" alt="Nudge screenshot 1">
+                    <img class="d2" src="images/nudge2.png" alt="Nudge screenshot 2">
+                    <img class="d3" src="images/nudge3.jpg" alt="Nudge screenshot 3">
+                </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- LampLighter -->
+        <section id="project-lamplighter" class="project-detail">
+        <div class="container">
+            <!-- 返回按钮样式已在上一步全局修改，这里直接用即可 -->
+            <button class="back-btn" data-back>← Back to Projects</button>
+
+            <div class="detail-layout">
+            <div class="detail-content">
+                <h2>LampLighter (GameJam)</h2>
+                <p class="detail-meta">Gameplay Programmer & UI/Audio Designer · Oct 2024</p>
+                
+                <p class="detail-text">
+                A fast-paced GameJam project where I took ownership of the entire <strong>Audio</strong> and <strong>UI</strong> pipeline. 
+                Designed and implemented the Main Menu and Pause Menu systems for seamless navigation.
+                </p>
+
+                <h3 class="detail-subtitle">Key Contributions</h3>
+                <ul class="detail-list">
+                <li>
+                    <strong>UI Systems:</strong> Built the complete <strong>Main Menu</strong> and <strong>Pause Menu</strong> interfaces, ensuring smooth transitions and clear player feedback.
+                </li>
+                <li>
+                    <strong>Audio Implementation:</strong> Curated and implemented the entire soundscape, including background music and gameplay SFX, creating an immersive atmosphere.
+                </li>
+                <li>
+                    <strong>Rapid Prototyping:</strong> Iterated on level pacing and feedback loops under tight GameJam time constraints.
+                </li>
+                </ul>
+            </div>
+
+            <!-- ⭐ 注意：这里加了 "landscape" 类，表示横图 -->
+            <div class="detail-stack landscape two" aria-label="LampLighter screenshots">
+                <img class="d1" src="images/lamplighter2.png" alt="Main Menu UI">
+                <img class="d2" src="images/lamplighter1.jpg" alt="Pause Menu UI">
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- SushiRat -->
+        <section id="project-sushirat" class="project-detail">
+        <div class="container">
+            <button class="back-btn" data-back>← Back to Projects</button>
+
+            <div class="detail-layout sushirat-layout">
+            <div class="detail-content">
+                <h2>SushiRat Revolution</h2>
+                <p class="detail-meta">CTIN 488 Class Project · Team of 4 · Spring 2025</p>
+                
+                <p class="detail-text">
+                A tabletop modification of the classic <strong>"Up The River"</strong> game. 
+                Designed collaboratively by a 4-person team, focusing on spatial blocking, risk management, and economy balancing.
+                </p>
+
+                <h3 class="detail-subtitle">Design Process</h3>
+                <ul class="detail-list">
+                <li>
+                    <strong>Collaborative Design:</strong> Co-designed core rules and iterations with 3 other designers.
+                </li>
+                <li>
+                    <strong>Mechanic Balance:</strong> Adjusted the "risk vs. reward" curve to encourage player interaction and tactical blocking.
+                </li>
+                <li>
+                    <strong>Card System:</strong> Designed a diverse deck of action cards (shown on the right) to introduce variability and catch-up mechanics.
+                </li>
+                </ul>
+            </div>
+
+          <!-- 右侧视觉区域 -->
+          <div class="sushi-visuals">
+            
+            <!-- 1. 卡牌堆现在放上面 -->
+            <p class="deck-hint">Hover to peek / Click to view</p>
+            <div class="card-deck">
+              <!-- 图片顺序保持不变 -->
+              <img src="images/card1.png" alt="Card 1" class="card lightbox-trigger">
+              <img src="images/card2.png" alt="Card 2" class="card lightbox-trigger">
+              <img src="images/card3.png" alt="Card 3" class="card lightbox-trigger">
+              <img src="images/card4.png" alt="Card 4" class="card lightbox-trigger">
+              <img src="images/card5.png" alt="Card 5" class="card lightbox-trigger">
+              <img src="images/card6.png" alt="Card 6" class="card lightbox-trigger">
+              <img src="images/card7.png" alt="Card 7" class="card lightbox-trigger">
+              <img src="images/card8.png" alt="Card 8" class="card lightbox-trigger">
+            </div>
+
+            <!-- 2. 游玩照片放下面 -->
+            <div class="gameplay-stack">
+              <img src="images/sushirat1.jpg" alt="Gameplay Photo 1" class="lightbox-trigger">
+              <img src="images/sushirat2.jpg" alt="Gameplay Photo 2" class="lightbox-trigger">
+            </div>
+
+          </div>
+
+            </div>
+        </div>
+        </section>
+
+
+    <section id="project-monstory" class="project-detail">
+      <div class="container">
+        <button class="back-btn" data-back>← Back to Projects</button>
+        <div class="detail-layout">
+          <div class="detail-content">
+            <h2>Monstory</h2>
+            <p class="detail-meta">Tabletop · Narrative Systems · 2025</p>
+            <p class="detail-text">
+              A collaborative storytelling game using hidden prompts and constrained language mechanics to guide creativity.
+              Balanced rules to keep stories coherent yet surprising.
+            </p>
+            <h3 class="detail-subtitle">Design Goals</h3>
+            <ul class="detail-list">
+              <li>Encourage playful collaboration without dominating players</li>
+              <li>Use constraints to spark creativity</li>
+              <li>Keep sessions readable and emotionally paced</li>
+            </ul>
+          </div>
+          <div class="detail-stack two" aria-label="Monstory images">
+            <img class="d1" src="images/monstory1.jpg" alt="Monstory image 1">
+            <img class="d2" src="images/monstory2.jpg" alt="Monstory image 2">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alchemist -->
+    <section id="project-alchemist" class="project-detail">
+      <div class="container">
+        <button class="back-btn" data-back>← Back to Projects</button>
+
+        <div class="detail-layout">
+          <div class="detail-content">
+            <h2>Untitled Alchemist Simulator</h2>
+            <p class="detail-meta">Lead Designer · Team of 4 · Multilateral Strategy</p>
+            
+            <p class="detail-text">
+              A high-stakes <strong>multilateral game</strong> driven by competitive <strong>auctions</strong> and resource <strong>trading</strong>. 
+              As the <strong>Lead Designer</strong>, I authored the complete rulebook and designed the core economic loops that force players to negotiate, bluff, and compete for limited ingredients.
+            </p>
+
+            <h3 class="detail-subtitle">Design Leadership</h3>
+            <ul class="detail-list">
+              <li>
+                <strong>Rule System:</strong> Wrote and iterated on the comprehensive rulebook, structuring complex multilateral interactions into clear, learnable phases.
+              </li>
+              <li>
+                <strong>Economy Design:</strong> Designed the central auction mechanics and dynamic pricing models to encourage player interaction.
+              </li>
+              <li>
+                <strong>Team Coordination:</strong> Collaborated with a team of 4 to playtest and balance the win conditions across multiple strategies.
+              </li>
+            </ul>
+          </div>
+
+          <!-- ⭐ 新增：quad 类用于 4 张图布局 -->
+          <div class="detail-stack quad" aria-label="Alchemist images">
+            <img class="d1" src="images/alchemist1.png" alt="Alchemist Board">
+            <img class="d2" src="images/alchemist2.png" alt="Rulebook Snippet">
+            <img class="d3" src="images/alchemist3.png" alt="Auction Phase">
+            <img class="d4" src="images/alchemist4.png" alt="Trading Interaction">
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+        <!-- Coming -->
+    <section id="project-coming" class="project-detail">
+      <div class="container">
+        <button class="back-btn" data-back>← Back to Projects</button>
+
+        <div class="detail-layout">
+          <div class="detail-content">
+            <h2>More Projects (Ongoing)</h2>
+            <p class="detail-text">
+              I’m actively building new gameplay prototypes and tools. This section will be updated with more work soon.
+            </p>
+          </div>
+          
+          <!-- ⭐ 已删除 <div class="detail-stack single">...</div> -->
+          
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Experience -->
+    <section id="experience">
+      <div class="container">
+        <h2>Experience</h2>
+        
+        <!-- 新增：雾玻璃风格的实习卡片 -->
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-main-info">
+              <h3>Eastern Institute of Technology</h3>
+              <span class="exp-role">Research Intern</span>
+            </div>
+            <div class="exp-meta-info">
+              <span class="exp-date">August 2024</span>
+              <span class="exp-loc">Ningbo, China</span>
+            </div>
+          </div>
+          
+          <ul class="exp-list">
+            <li>
+              Independently developed comprehensive control code (<strong>approx. 1000 lines</strong>) for a modular mechanical snake, programmed on <strong>Arduino Uno</strong>. Implemented motor twisting angles based on mechanical constraints to prevent exceeding operational limits.
+            </li>
+            <li>
+              Successfully enabled sophisticated locomotion patterns, including <strong>forward movement, head lifting, and complex serpentine maneuvers</strong>, demonstrating a strong grasp of robotic kinematics.
+            </li>
+            <li>
+              Participated in a <strong>burr detection project</strong> using both <strong>traditional computer vision (edge detection)</strong> and advanced <strong>deep learning models like YOLOv8</strong> to identify surface defects.
+            </li>
+            <li>
+              Contributed to data collection and annotation for training the YOLOv8 model, enhancing detection accuracy for intricate burr patterns.
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="container">
+        <h2>Skills</h2>
+        
+        <div class="skills-grid">
+          
+          <!-- Card 1: Programming -->
+          <div class="skill-card">
+            <h3>Programming Languages</h3>
+            <div class="skill-tags">
+              <span>C#</span>
+              <span>C++</span>
+              <span>Python</span>
+              <span>Java</span>
+              <span>SQL</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Game Development -->
+          <div class="skill-card">
+            <h3>Game Development</h3>
+            <div class="skill-tags">
+              <span>Unity Engine</span>
+              <span>Gameplay Systems</span>
+              <span>Tool Development</span>
+              <span>Rapid Prototyping</span>
+              <span>Physics / Colliders</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Machine Learning -->
+          <div class="skill-card">
+            <h3>Machine Learning</h3>
+            <div class="skill-tags">
+              <span>PyTorch / YOLOv8</span>
+              <span>Data Preprocessing</span>
+              <span>Model Training</span>
+              <span>Computer Vision</span>
+              <span>Evaluation Metrics</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Tools & Others -->
+          <div class="skill-card">
+            <h3>Tools & Platforms</h3>
+            <div class="skill-tags">
+              <span>Git / GitHub</span>
+              <span>Unity Editor</span>
+              <span>Arduino / Embedded</span>
+              <span>FMOD Audio</span>
+              <span>Adobe Suite</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section id="contact">
+      <div class="container">
+        
+        <div class="contact-layout">
+          
+          <div class="contact-image-wrapper">
+            <img src="images/about2.jpg" alt="Jiayi Pan">
+          </div>
+
+          <div class="contact-info">
+            <h2>Contact Me</h2>
+            <p class="contact-text">
+              I'm always open to discussing game design, engineering, or new opportunities. 
+              <br><strong>Feel free to contact me!</strong>
+            </p>
+
+            <div class="social-links">
+              <a href="mailto:joypan@usc.edu" class="social-btn" aria-label="Email">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </a>
+
+              <a href="https://github.com/Chaos1009" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              </a>
+
+              <a href="https://www.linkedin.com/in/jiayi-pan-joy/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section id="cv">
+      <div class="container">
+        <h2>Curriculum Vitae</h2>
+        
+        <div class="cv-wrapper">
+          <iframe src="cv.pdf" title="Jiayi Pan CV"></iframe>
+        </div>
+
+        <div class="cv-actions">
+          <a href="cv.pdf" target="_blank" class="download-btn">
+            Download PDF
+          </a>
+        </div>
+        
+      </div>
+    </section>
+
+
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div id="caption"></div>
+    </div>
+
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

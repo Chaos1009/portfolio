@@ -1,0 +1,1664 @@
+/* =========================
+   Reset & Base
+   ========================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* ✅ 开启 Y 轴强制滚动捕捉 */
+  scroll-snap-type: y mandatory; 
+}
+
+body {
+  background-color: #fefefe;
+  color: #222;
+  line-height: 1.8;
+  font-family: 'Lora', serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* =========================
+   Layout Containers
+   ========================= */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+main section {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  
+  padding-top: 120px; 
+  padding-bottom: 80px;
+  scroll-margin-top: 0;
+  
+  /* ✅ 设定每个板块的捕捉点：只要滚动停止，就自动吸附到板块顶部 */
+  scroll-snap-align: start;
+  /* 强制在每个板块停留，防止一次滑过多个 */
+  scroll-snap-stop: always; 
+}
+
+#about::before,
+#education::before,
+#publications::before,
+#projects::before,
+.project-detail::before {
+  /* 确保这里是 top center */
+  background-position: top center !important; 
+}
+
+main ul li {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+main a {
+  color: #0070f3;
+}
+
+main a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   Navigation (Fixed Top)
+   ========================= */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.75); /*稍微增加一点不透明度，防止背景杂乱*/
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 10px rgba(0,0,0,0.05); /* 阴影改淡一点，更高级 */
+  z-index: 1000;
+}
+
+.nav-container {
+  /* ⭐ 关键修改：移除 max-width，让其占满全屏 */
+  width: 100%;
+  max-width: none; 
+  margin: 0;
+  
+  /* Flex 布局：两端对齐 */
+  display: flex;
+  align-items: center; /* 垂直居中 */
+  justify-content: space-between; /* 左边一个(H1)，右边一个(Nav)，把中间空出来 */
+  
+  /* 左右留白：如果觉得贴边太紧，可以把 40px 改成 50px 或 60px */
+  padding: 12px 40px; 
+}
+
+.top-nav h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.5px; /* 增加一点字母间距，更精致 */
+  margin: 0; /* 确保没有多余边距 */
+  white-space: nowrap; /* 防止名字换行 */
+}
+
+.top-nav nav {
+  position: relative;
+  /* 不需要 margin-right，space-between 会自动推到最右 */
+}
+
+.top-nav nav ul {
+  display: flex;
+  gap: 30px; /* 导航项之间的间距，可以调大一点显得更透气 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.top-nav nav a {
+  font-weight: 700;
+  font-size: 15px; /* 稍微调小一点点，显得更秀气 */
+  color: #333;
+  padding: 8px 0;
+  transition: color 0.3s;
+  display: inline-block;
+  text-transform: uppercase; /* 比如全大写会看起来更像导航（可选） */
+  letter-spacing: 1px;
+}
+
+.top-nav nav a:hover {
+  color: #6a8caf; /* 悬浮颜色 */
+}
+
+/* 下划线保持不变 */
+.nav-underline, .nav-hoverline {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: #6a8caf;
+  border-radius: 1px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.nav-underline { left: 0; }
+
+
+/* =========================
+   Section: About
+   ========================= */
+#about {
+  position: relative;
+  overflow: hidden; 
+  min-height: 100vh;
+}
+
+#about::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  
+  background-image: url('images/about-bg.jpg');
+  background-size: cover;
+  
+  /* ⭐ 关键修复：加了 !important 强制显示图片中间，不被之前的设置覆盖 */
+  background-position: center center !important; 
+  background-repeat: no-repeat;
+  
+  opacity: 0.4;
+  z-index: 0;
+}
+
+#about .container {
+  position: relative;
+  z-index: 1;
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding-top: 80px;
+}
+
+/* 保持之前的布局：图片左移 */
+.photo-stack {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin-left: -300px; 
+}
+
+.photo-stack img {
+  position: absolute;
+  width: 320px; 
+  height: auto;
+  border-radius: 22px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.25);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.photo-stack .p1 { 
+  left: 0;           
+  top: 60px; 
+  z-index: 1; 
+  transform: rotate(-3deg); 
+}
+
+.photo-stack .p2 { 
+  left: 240px;      
+  top: 0; 
+  z-index: 3; 
+  transform: rotate(2deg); 
+}
+
+.photo-stack .p3 { 
+  left: 480px;       
+  top: 80px; 
+  z-index: 2; 
+  transform: rotate(4deg); 
+}
+
+.photo-stack img:hover {
+  z-index: 20;
+  transform: translateY(-10px) scale(1.05) rotate(0deg);
+}
+
+/* 文字容器 */
+.about-text {
+  justify-self: end;
+  max-width: 500px; /* ✅ 稍微加宽一点容器，容纳大号字体 */
+  text-align: left;
+  transform: translateX(60px); 
+  margin-top: -120px;
+}
+
+/* ✅ 新增：针对 About 区域的超大标题 */
+.about-text h2 {
+  font-size: 36px; /* 原来是 28px，现在放大两倍 */
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  color: #000;
+}
+
+/* ✅ 新增：针对 About 区域的大号正文 */
+.about-text p {
+  font-size: 20px; /* 原来是 16px */
+  line-height: 1.6;
+  color: #333;
+}
+
+/* 响应式 */
+@media (max-width: 1000px) {
+  .about-layout {
+    grid-template-columns: 1fr; 
+    justify-items: center;
+    gap: 40px;
+  }
+  
+  .photo-stack {
+    margin-left: 0;
+    height: 320px;
+    transform: scale(0.9); 
+    transform-origin: center;
+  }
+  
+  .photo-stack .p1 { left: 40px; }
+  .photo-stack .p2 { left: 160px; }
+  .photo-stack .p3 { left: 280px; }
+  
+  .about-text {
+    justify-self: center;
+    text-align: center;
+    padding-bottom: 40px;
+    transform: none; 
+  }
+}
+
+/* =========================
+   Section: Education
+   ========================= */
+#education {
+  /* ⭐ 关键修复 1：开启 Flex 垂直居中 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 垂直居中 */
+  
+  /* 之前的背景设置保持不变 */
+  position: relative;
+  overflow: hidden;
+}
+
+#education::before {
+  content:'';
+  position: absolute;
+  inset: 0;
+  background-image: url('images/education-bg.jpg');
+  background-size: cover;
+  background-position: center center !important; /* 强制居中背景 */
+  opacity: 0.4;
+  z-index: 0;
+}
+
+#education .container {
+  position: relative;
+  z-index: 1;
+  width: 100%; /* 确保容器宽度正常 */
+}
+
+/* 时间轴容器 */
+.edu-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 两列布局 */
+  gap: 80px; /* 增加卡片之间的间距 */
+  
+  /* ⭐ 关键修复 2：给顶部留出空间放那根线，防止线切到字 */
+  padding-top: 60px; 
+  margin-top: 20px;
+}
+
+/* 横线 (时间轴主体) */
+.edu-timeline::before {
+  content:'';
+  position: absolute;
+  left: 0; 
+  right: 0; 
+  
+  /* 线的位置：放在 padding 留出的区域里 */
+  top: 24px; 
+  
+  height: 4px; /*稍微加粗一点点*/
+  background: rgba(107, 161, 232, 0.5); /* 浅蓝半透明 */
+  border-radius: 99px;
+}
+
+/* 每个学历单元 */
+.edu-item {
+  position: relative;
+}
+
+/* 时间轴圆点 */
+.edu-dot {
+  width: 20px; 
+  height: 20px;
+  border-radius: 50%;
+  background: #fff; /* 白心 */
+  border: 4px solid #b0c4de; /* 蓝圈 */
+  
+  position: absolute;
+  /* ⭐ 关键计算：线在 24px，Item 从 60px 开始。
+     24 - 60 = -36px。减去圆点半径，定在 -44px 左右正好在线上 */
+  top: -44px; 
+  left: 0;
+  
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 2;
+}
+
+/* 学历卡片 */
+.edu-card {
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 20px;
+  padding: 24px;
+  
+  box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.edu-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255,255,255,0.85);
+}
+
+.edu-card h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: #1f2a44;
+}
+
+.edu-meta {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px;
+  font-family: monospace; /* 稍微换个字体突出时间 */
+  background: rgba(0,0,0,0.03);
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.edu-desc {
+  font-size: 16px;
+  margin-bottom: 0;
+  color: #333;
+}
+
+/* 响应式：窄屏变竖向时间轴 */
+@media (max-width: 900px) {
+  .edu-timeline {
+    grid-template-columns: 1fr; /* 变单列 */
+    gap: 40px;
+    padding-top: 0; /* 不需要顶部留白了 */
+    padding-left: 30px; /* 左边留白放竖线 */
+  }
+
+  /* 竖线 */
+  .edu-timeline::before {
+    left: 8px;       /* 线在左边 */
+    right: auto;
+    top: 0; 
+    bottom: 0;
+    width: 4px;      /* 竖线宽度 */
+    height: auto;
+  }
+
+  /* 圆点位置调整 */
+  .edu-dot {
+    top: 24px;       /* 对齐卡片标题 */
+    left: -30px;     /* 移到竖线上 */
+  }
+}
+
+
+/* =========================
+   Section: Publications
+   ========================= */
+#publications::before {
+  content:'';
+  position: absolute;
+  inset: 0;
+  background-image: url('images/publication-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.4;
+  z-index: 0;
+}
+#publications .container { position: relative; z-index: 1; }
+
+.pub-card {
+  margin-top: 28px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.65);
+  border-radius: 22px;
+  padding: 26px;
+  box-shadow: 0 14px 38px rgba(0,0,0,0.14);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pub-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 46px rgba(0,0,0,0.18);
+}
+
+.pub-authors { font-size: 16px; opacity: 0.9; margin-bottom: 8px; }
+.pub-venue { font-size: 15px; opacity: 0.85; margin-bottom: 14px; }
+.pub-btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  background: rgba(176,196,222,0.35);
+  border: 1px solid rgba(176,196,222,0.55);
+  color: #1f2a44;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.pub-btn:hover {
+  background: rgba(176,196,222,0.55);
+  text-decoration: none;
+}
+
+/* =========================
+   Section: Projects List
+   ========================= */
+#projects::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image: url('images/projects-bg.jpg');
+  background-size: cover;
+  /* 确保背景居中，不被裁切 */
+  background-position: center center !important; 
+  opacity: 0.35;
+  z-index: 0;
+}
+
+#projects .container, .projects-wrapper { position: relative; z-index: 1; }
+
+.projects-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.projects-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px; /* 稍微增加卡片间距 */
+}
+
+/* Card Style */
+.project-card {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  
+  /* ⭐ 关键修改 1：强制指定 Lora 字体，防止按钮使用系统默认字体 */
+  font-family: 'Lora', serif;
+  
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.65);
+  border-radius: 22px;
+  padding: 24px; /* 增加内边距，让大号文字不拥挤 */
+  box-shadow: 0 14px 38px rgba(0,0,0,0.14);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  /* 稍微加高一点最小高度，容纳变大的文字 */
+  min-height: 320px; 
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 46px rgba(0,0,0,0.18);
+  background: rgba(255,255,255,0.7); /* hover时稍微变白一点 */
+}
+
+.project-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 52px;
+  margin-bottom: 12px;
+  gap: 10px;
+}
+
+/* ⭐ 关键修改 2：标题放大 */
+.project-top h3 {
+  font-size: 24px; /* 原来 18px -> 24px */
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  color: #000;
+  
+  max-width: 70%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.project-badge {
+  font-size: 13px; /* 稍微放大 */
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(176,196,222,0.4);
+  border: 1px solid rgba(176,196,222,0.6);
+  color: #1f2a44;
+  white-space: nowrap;
+  font-family: 'Lora', serif; /* 确保 badge 也是 Lora */
+}
+
+/* ⭐ 关键修改 3：角色文字放大 */
+.project-role {
+  font-size: 16px; /* 原来 14px -> 16px */
+  font-weight: 700; /* 加粗一点，区分层级 */
+  color: #222;
+  opacity: 0.95;
+  margin-bottom: 10px;
+  min-height: 48px; 
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+/* ⭐ 关键修改 4：正文放大，行距拉开 */
+.project-desc {
+  font-size: 17px; /* 原来 14px -> 17px */
+  opacity: 0.9;
+  margin-bottom: 12px;
+  line-height: 1.6; /* 增加行距，更易读 */
+  min-height: 80px; /* 适应变大的文字 */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.project-tags {
+  margin-top: auto;
+  padding-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ⭐ 关键修改 5：标签文字放大 */
+.project-tags span {
+  font-size: 13px; /* 原来 12px -> 13px */
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.7);
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.project-coming { background: rgba(176,196,222,0.22); }
+
+
+/* =========================
+   Project Detail Pages
+   ========================= */
+.project-detail {
+  display: none;
+  position: relative;
+}
+
+.project-detail::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image: url('images/projects-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.28;
+  z-index: 0;
+}
+
+.project-detail .container { position: relative; z-index: 1; max-width: 1000px; }
+
+/* Back Button */
+.back-btn {
+  /* ⭐ 关键：显式指定 Lora 字体，因为 button 标签不会自动继承 body 字体 */
+  font-family: 'Lora', serif;
+  
+  font-size: 17px;       /* 稍微调大字号，显得更专业 */
+  font-weight: 700;      /* 加粗，提升可读性 */
+  color: #1f2a44;
+  
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 30px;
+  opacity: 0.85;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  opacity: 1;
+  transform: translateX(-4px);
+  color: #5a78a6;
+  text-decoration: underline;
+}
+
+/* Detail Layout (Left text, Right Image) */
+.detail-layout {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: minmax(420px, 560px) minmax(420px, 1fr);
+  gap: 60px;
+  align-items: start;
+}
+
+.detail-content h2 { margin-top: 0; }
+
+.detail-stack {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  height: 420px;
+  justify-self: end;
+  margin-top: 20px;
+}
+
+.detail-stack img {
+  position: absolute;
+  width: 320px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.20);
+  transition: transform 0.25s ease;
+}
+
+.detail-stack img:hover {
+  z-index: 10;
+  transform: translateY(-10px) scale(1.04);
+}
+
+/* Image Positioning */
+.detail-stack .d1 { left: 0; top: 60px; z-index: 1; transform: rotate(-2deg); }
+.detail-stack .d2 { left: 160px; top: 0; z-index: 3; transform: rotate(1deg); }
+.detail-stack .d3 { left: 320px; top: 70px; z-index: 2; transform: rotate(3deg); }
+
+/* Variations */
+.detail-stack.two .d2 { left: 190px; }
+.detail-stack.single { height: auto; }
+.detail-stack.single img { position: relative; width: 100%; height: auto; transform: none; }
+
+
+/* =========================
+   新增：横版图片堆叠模式 (Landscape Stack)
+   用于 LampLighter 这样展示宽屏截图的项目
+   ========================= */
+
+/* 1. 修改图片尺寸：变宽、变矮 */
+.detail-stack.landscape img {
+  width: 420px;       /* 宽度增加 (原320) */
+  height: 240px;      /* 高度减小 (原400) */
+  object-fit: cover;
+}
+
+/* 2. 调整堆叠位置：因为图变宽了，偏移量也要调整 */
+
+/* 底下的图 (d1)：稍微往左下放一点 */
+.detail-stack.landscape .d1 {
+  left: 0;
+  top: 60px;
+  z-index: 1;
+  transform: rotate(-3deg);
+}
+
+/* 顶上的图 (d2)：稍微往右上放一点 */
+.detail-stack.landscape .d2 {
+  left: 100px;        /* 稍微错开多一点 */
+  top: 0;
+  z-index: 2;
+  transform: rotate(2deg);
+}
+
+/* 3. 悬停效果保持一致，但参数微调防止出框 */
+.detail-stack.landscape img:hover {
+  z-index: 10;
+  transform: translateY(-5px) scale(1.05) rotate(0deg);
+}
+
+/* ... 之前的 .detail-stack 样式 ... */
+
+/* =========================
+   新增：四张图堆叠模式 (Quad Stack)
+   用于 Alchemist 这种需要展示多张素材的项目
+   ========================= */
+
+/* 1. 设置图片基础尺寸：稍微小一点，做成横版以适应 2x2 */
+.detail-stack.quad img {
+  width: 260px;
+  height: 190px;
+  object-fit: cover;
+}
+
+/* 2. 四张图的位置安排 (类似 2x2 网格，但带有艺术旋转) */
+
+/* 左上 */
+.detail-stack.quad .d1 {
+  left: 0;
+  top: 0;
+  z-index: 1;
+  transform: rotate(-3deg);
+}
+
+/* 右上 (靠右对齐) */
+.detail-stack.quad .d2 {
+  left: auto;   /* 覆盖默认 left */
+  right: 10px;  /* 靠右 */
+  top: 20px;
+  z-index: 2;
+  transform: rotate(2deg);
+}
+
+/* 左下 */
+.detail-stack.quad .d3 {
+  left: 20px;
+  top: 160px;   /* 放在下面 */
+  z-index: 3;
+  transform: rotate(1deg);
+}
+
+/* 右下 */
+.detail-stack.quad .d4 {
+  left: auto;
+  right: 0;
+  top: 190px;
+  z-index: 4;
+  transform: rotate(-2deg);
+}
+
+/* 3. 悬停放大效果 */
+.detail-stack.quad img:hover {
+  z-index: 20;
+  transform: scale(1.15) rotate(0deg); /* 稍微放大一点 */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* =========================
+   Special Tweak for Coming Soon
+   (无图模式，文字居中)
+   ========================= */
+
+#project-coming .detail-layout {
+  /* 覆盖原本的 Grid 布局，改为 Flex 居中 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  
+  /* 限制宽度，防止文字一行太长难以阅读 */
+  max-width: 800px;
+  margin: 0 auto; /* 水平居中 */
+  gap: 0;
+}
+
+#project-coming .detail-content h2 {
+  font-size: 40px; /* 标题稍微放大一点，撑场面 */
+  margin-bottom: 24px;
+}
+
+#project-coming .detail-text {
+  font-size: 20px;
+  color: #555;
+  max-width: 600px; /* 正文稍微窄一点，更精致 */
+  margin: 0 auto;
+}
+
+/* =========================
+   Section: Experience (Glass Card Style)
+   ========================= */
+
+#experience {
+  position: relative;
+  overflow: hidden;
+  /* 确保和其他板块一样的垂直居中布局（可选，看你喜好） */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ⭐ 新增：Experience 的背景图 */
+#experience::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  
+  /* 这里你可以换成 images/experience-bg.png */
+  background-image: url('images/experience-bg.jpg'); 
+  
+  background-size: cover;
+  background-position: center center !important;
+  opacity: 0.4; /* 调整透明度，别太抢眼 */
+  z-index: 0;
+}
+
+#experience .container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* ... 下面接着是 .exp-card 的样式 ... */
+
+
+/* =========================
+   Section: Experience (Glass Card Style)
+   ========================= */
+
+/* 复用 Publication 的卡片基础样式 */
+.exp-card {
+  margin-top: 28px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.65);
+  border-radius: 22px;
+  padding: 30px; /*稍微多一点内边距*/
+  box-shadow: 0 14px 38px rgba(0,0,0,0.14);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.exp-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 46px rgba(0,0,0,0.18);
+}
+
+/* 顶部信息栏：左边公司职位，右边时间地点 */
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.06); /* 加一条淡淡的分割线 */
+}
+
+.exp-main-info h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #1f2a44;
+}
+
+.exp-role {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 700;
+  color: #5a78a6;
+  background: rgba(176,196,222,0.25);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.exp-meta-info {
+  text-align: right;
+  font-family: 'Lora', serif;
+  color: #666;
+}
+
+.exp-date {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.exp-loc {
+  display: block;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* 列表样式优化 */
+.exp-list {
+  padding-left: 20px;
+}
+
+.exp-list li {
+  list-style: disc;
+  font-size: 16px;
+  margin-bottom: 12px;
+  line-height: 1.7;
+  color: #333;
+}
+
+.exp-list strong {
+  color: #000;
+  font-weight: 700;
+}
+
+/* 响应式：手机上把 Header 变成垂直排列 */
+@media (max-width: 700px) {
+  .exp-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .exp-meta-info {
+    text-align: left;
+    display: flex;
+    gap: 15px; /* 时间和地点在一行显示 */
+  }
+}
+
+/* =========================
+   Section: Skills (Grid Cards)
+   ========================= */
+
+#skills {
+  position: relative;
+  overflow: hidden;
+  /* 垂直居中，填满屏幕 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 别忘了背景图！复用之前的背景即可 */
+#skills::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('images/skills-bg.jpg'); /* 或者用新的 skills-bg.png */
+  background-size: cover;
+  background-position: center center !important;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+#skills .container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* 2x2 网格布局 */
+.skills-grid {
+  display: grid;
+  /* 两个等宽列，自动换行 */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px; /* 卡片之间的间距 */
+  margin-top: 40px;
+}
+
+/* 技能卡片样式 */
+.skill-card {
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.65);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 14px 38px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  /* 让卡片看起来有一点高度 */
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+  background: rgba(255,255,255,0.7);
+}
+
+.skill-card h3 {
+  font-family: 'Lora', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #1f2a44;
+  border-bottom: 2px solid rgba(176,196,222,0.4); /* 标题下加条淡线装饰 */
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+/* 标签容器 */
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* 单个技能标签 */
+.skill-tags span {
+  font-family: 'Lora', serif; /* 保持字体统一 */
+  font-size: 15px;
+  padding: 8px 16px;
+  border-radius: 8px; /* 方圆角，比项目标签稍微方一点 */
+  
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.8);
+  color: #333;
+  font-weight: 600;
+  
+  transition: background 0.2s, transform 0.2s;
+  cursor: default;
+}
+
+/* 鼠标划过标签的小动效 */
+.skill-tags span:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  color: #000;
+}
+
+/* 响应式：手机上变成一列 */
+@media (max-width: 800px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .skill-card {
+    min-height: auto;
+    padding: 24px;
+  }
+}
+
+/* =========================
+   Section: Contact Me
+   ========================= */
+
+#contact {
+  position: relative;
+  overflow: hidden;
+  /* 垂直居中，填满屏幕 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ⭐ 新背景图配置 */
+#contact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  
+  /* 请确保你上传了这张图片，或者暂时用 about-bg.png 替代 */
+  background-image: url('images/contact-bg.jpg'); 
+  
+  background-size: cover;
+  background-position: center center !important;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+#contact .container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* 左右布局容器 */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 左图右文 */
+  gap: 80px;
+  align-items: center; /* 垂直居中对齐 */
+  padding: 0 40px;
+}
+
+/* --- 左侧：照片 --- */
+.contact-image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-image-wrapper img {
+  width: 100%;
+  max-width: 420px; /* 控制最大尺寸 */
+  height: auto;
+  border-radius: 24px;
+  
+  /* 拍立得风格边框 */
+  border: 8px solid #fff; 
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  
+  /* 稍微旋转一点点，显得不那么死板 */
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease;
+}
+
+.contact-image-wrapper img:hover {
+  transform: rotate(0deg) scale(1.02); /* 悬停回正 */
+}
+
+/* --- 右侧：信息 --- */
+.contact-info {
+  text-align: left;
+}
+
+.contact-info h2 {
+  font-size: 48px; /* 标题很大 */
+  margin-bottom: 20px;
+  color: #1f2a44;
+}
+
+.contact-text {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 40px;
+  max-width: 480px;
+}
+
+.contact-text strong {
+  font-size: 24px;
+  color: #000;
+  display: block; /* 换行显示重点 */
+  margin-top: 10px;
+}
+
+/* 社交图标容器 */
+.social-links {
+  display: flex;
+  gap: 24px; /* 图标间距 */
+}
+
+/* 圆形毛玻璃按钮 */
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 72px;  /* 按钮尺寸 */
+  height: 72px;
+  border-radius: 50%;
+  
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  color: #333;
+  
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* 弹性动画 */
+}
+
+.social-btn svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* 悬停效果 */
+.social-btn:hover {
+  transform: translateY(-8px) scale(1.1);
+  background: #fff;
+  color: #0070f3; /* 变蓝 */
+  box-shadow: 0 14px 30px rgba(0,112,243,0.3); /* 蓝色光晕 */
+}
+
+/* 响应式：手机端 */
+@media (max-width: 900px) {
+  .contact-layout {
+    grid-template-columns: 1fr; /* 变单列 */
+    text-align: center;
+    gap: 50px;
+    padding: 0;
+  }
+  
+  .contact-image-wrapper img {
+    max-width: 300px; /* 手机上图小一点 */
+  }
+  
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 内容居中 */
+  }
+  
+  .contact-text {
+    text-align: center;
+  }
+  
+  .contact-info h2 {
+    font-size: 36px;
+  }
+}
+
+/* =========================
+   Section: CV
+   ========================= */
+
+#cv {
+  position: relative;
+  overflow: hidden;
+  /* 垂直居中 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* CV 背景图 */
+#cv::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  
+  /* 请确保上传了 images/cv-bg.png，或者暂时复用其他背景 */
+  background-image: url('images/experience-bg.jpg');
+  
+  background-size: cover;
+  background-position: center center !important;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+#cv .container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  text-align: center; /* 让标题和按钮居中 */
+}
+
+/* PDF 容器 (雾玻璃/白底效果) */
+.cv-wrapper {
+  width: 100%;
+  max-width: 800px; /* 限制最大宽度，防止在大屏上太宽 */
+  height: 1000px;   /* 固定高度，确保能看到大部分内容 */
+  margin: 0 auto;   /* 居中 */
+  
+  background: rgba(255,255,255,0.8); /* 给个白底，防止 PDF 文字和背景图重叠 */
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.9);
+  
+  overflow: hidden; /* 保证 iframe 圆角不被切掉 */
+}
+
+/* iframe 样式 */
+.cv-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* 底部按钮区 */
+.cv-actions {
+  margin-top: 40px;
+}
+
+.download-btn {
+  display: inline-block;
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  
+  background-color: #1f2a44; /* 深蓝色背景 */
+  padding: 14px 32px;
+  border-radius: 50px;
+  box-shadow: 0 10px 20px rgba(31, 42, 68, 0.3);
+  
+  transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+  transform: translateY(-4px);
+  background-color: #3b4d70; /* 悬浮变浅一点 */
+  box-shadow: 0 14px 30px rgba(31, 42, 68, 0.4);
+  text-decoration: none;
+}
+
+/* 响应式：手机端 */
+@media (max-width: 700px) {
+  .cv-wrapper {
+    height: 500px; /* 手机上预览窗口稍微改小一点 */
+  }
+}
+
+
+/* =========================
+   Media Queries (Responsive Design)
+   ========================= */
+
+/* --- 1. 平板/小笔记本 (max-width: 1000px) --- */
+@media (max-width: 1000px) {
+  
+  /* === Project Details (详情页适配) === */
+  .detail-layout { 
+    grid-template-columns: 1fr; 
+    gap: 40px; 
+  }
+  
+  /* 竖图堆叠适配 */
+  .detail-stack { 
+    justify-self: start; 
+    max-width: 520px; 
+    height: 360px; 
+  }
+  .detail-stack img { 
+    width: 280px; 
+    height: 340px; 
+  }
+  .detail-stack .d2 { left: 140px; }
+  .detail-stack .d3 { left: 280px; }
+  
+  /* 横图堆叠 (Landscape) 适配 */
+  .detail-stack.landscape { 
+    height: 300px; 
+  }
+  .detail-stack.landscape img {
+    width: 340px; 
+    height: 200px;
+  }
+  .detail-stack.landscape .d1 { left: 20px; top: 40px; }
+  .detail-stack.landscape .d2 { left: 80px; top: 0; }
+
+  /* 四图堆叠 (Quad) 适配 */
+  .detail-stack.quad { 
+    height: 380px; 
+    max-width: 100%; 
+  }
+  .detail-stack.quad img {
+    width: 200px; 
+    height: 150px;
+  }
+  .detail-stack.quad .d1 { left: 0; top: 0; }
+  .detail-stack.quad .d2 { right: 0; top: 40px; }
+  .detail-stack.quad .d3 { left: 10px; top: 140px; }
+  .detail-stack.quad .d4 { right: 10px; top: 180px; }
+}
+
+/* --- 2. 手机/窄屏 (max-width: 900px) --- */
+@media (max-width: 900px) {
+  
+  /* === About Section (手机端修复版) === */
+  .about-layout {
+    grid-template-columns: 1fr; /* 单列 */
+    justify-items: center;
+    gap: 40px;
+    padding-top: 40px;
+  }
+  
+  /* 图片容器修复：防止溢出 */
+  .photo-stack {
+    margin-left: 0;
+    width: 100%;
+    max-width: 360px; /* 限制宽度适应手机 */
+    height: 420px;
+    margin: 0 auto;
+    transform: none; 
+  }
+  
+  /* 图片尺寸缩小 */
+  .photo-stack img {
+    width: 240px; 
+  }
+  
+  /* 图片位置收紧 */
+  .photo-stack .p1 { left: 0; transform: rotate(-3deg); }
+  .photo-stack .p2 { left: 60px; transform: rotate(2deg); }
+  .photo-stack .p3 { left: 120px; transform: rotate(4deg); }
+  
+  /* 文字区域修复：取消负边距，防止重叠 */
+  .about-text {
+    justify-self: center;
+    text-align: center;
+    padding-bottom: 40px;
+    transform: none;
+    margin-top: 0; /* ⭐ 关键修复 */
+    max-width: 100%;
+    padding: 0 20px;
+  }
+  
+  .about-text h2 {
+    font-size: 32px;
+  }
+
+  /* === Education Section (竖向时间轴) === */
+  .edu-timeline { 
+    grid-template-columns: 1fr; 
+    gap: 20px; 
+  }
+  .edu-timeline::before { 
+    left: 10px; 
+    top: 0; 
+    bottom: 0; 
+    width: 2px; 
+    height: auto; 
+  }
+  .edu-dot { 
+    top: 6px; 
+    left: 3px; 
+  }
+  .edu-card { 
+    margin-left: 28px; 
+    width: auto; 
+  }
+  
+  /* === Navigation (隐藏顶部导航菜单) === */
+  .top-nav nav { 
+    display: none; /* 手机上通常隐藏导航链接，或者你可以做成汉堡菜单 */
+  }
+  
+  /* Contact 布局调整 */
+  .contact-layout {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 50px;
+    padding: 0;
+  }
+  .contact-image-wrapper img { max-width: 300px; }
+  .contact-info { align-items: center; }
+  .contact-text { text-align: center; }
+  .social-links { justify-content: center; }
+}
+
+/* --- 3. 小屏手机 (max-width: 650px) --- */
+@media (max-width: 650px) {
+  /* 项目列表变为单列 */
+  .projects-grid { 
+    grid-template-columns: 1fr; 
+  }
+  /* 详情页图片再小一点 */
+  .detail-stack img { 
+    width: 220px; 
+    height: 280px; 
+  }
+}
+
+
+/* =========================
+   SushiRat Special Layout
+   ========================= */
+
+.sushi-visuals {
+  display: flex;
+  flex-direction: column;
+  gap: 60px; 
+  width: 100%;
+  max-width: 500px;
+  justify-self: end;
+  margin-top: 10px;
+}
+
+/* --- Part 1: 卡牌堆 (Card Deck) --- */
+.deck-hint {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 5px;
+  font-style: italic;
+}
+
+.card-deck {
+  position: relative;
+  height: 220px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+  margin-bottom: 20px;
+}
+
+.card {
+  position: absolute;
+  width: 100px;
+  height: 140px;
+  border-radius: 8px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+  background: #fff;
+  border: 1px solid #ddd;
+  
+  /* 初始位置：叠在中间 */
+  left: 50%;
+  top: 0;
+  margin-left: -50px;
+  transform-origin: bottom center;
+  
+  /* 初始随机角度 */
+  transform: rotate(0deg);
+  
+  /* 优化过渡：只让 transform 动，防止 z-index 闪烁 */
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: zoom-in;
+}
+
+/* 初始堆叠时的微小随机角度 */
+.card:nth-child(odd) { transform: rotate(-2deg); }
+.card:nth-child(even) { transform: rotate(1deg); }
+
+
+/* --- 扇形展开 (Fan Out) 逻辑 --- */
+
+/* 当鼠标移入 Deck 区域，卡牌飞到指定位置 */
+.card-deck:hover .card:nth-child(1) { transform: translateX(-160px) translateY(10px) rotate(-30deg); z-index: 1; }
+.card-deck:hover .card:nth-child(2) { transform: translateX(-120px) translateY(-5px) rotate(-20deg); z-index: 2; }
+.card-deck:hover .card:nth-child(3) { transform: translateX(-80px)  translateY(-15px) rotate(-10deg); z-index: 3; }
+.card-deck:hover .card:nth-child(4) { transform: translateX(-30px)  translateY(-20px) rotate(-3deg);  z-index: 4; }
+.card-deck:hover .card:nth-child(5) { transform: translateX(30px)   translateY(-20px) rotate(3deg);   z-index: 5; }
+.card-deck:hover .card:nth-child(6) { transform: translateX(80px)   translateY(-15px) rotate(10deg);  z-index: 6; }
+.card-deck:hover .card:nth-child(7) { transform: translateX(120px)  translateY(-5px) rotate(20deg);   z-index: 7; }
+.card-deck:hover .card:nth-child(8) { transform: translateX(160px)  translateY(10px) rotate(30deg);   z-index: 8; }
+
+
+/* --- 单张卡牌 Hover 放大 (修复抽搐的关键) --- */
+
+/* 通用样式：层级最高，加阴影 */
+.card-deck .card:hover {
+  z-index: 100 !important;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+  border-color: #888;
+  /* 注意：这里不再写 transform: scale(...)，而是下面分别写 */
+}
+
+/* ⭐ 关键修复：针对每一张卡，保留它的位移和旋转，在此基础上叠加缩放 scale(1.35) */
+/* 这样卡牌就不会“跳回”中间，而是原地放大 */
+
+.card-deck:hover .card:nth-child(1):hover { transform: translateX(-160px) translateY(10px) rotate(-30deg) scale(1.35) !important; }
+.card-deck:hover .card:nth-child(2):hover { transform: translateX(-120px) translateY(-5px) rotate(-20deg) scale(1.35) !important; }
+.card-deck:hover .card:nth-child(3):hover { transform: translateX(-80px)  translateY(-15px) rotate(-10deg) scale(1.35) !important; }
+.card-deck:hover .card:nth-child(4):hover { transform: translateX(-30px)  translateY(-20px) rotate(-3deg)  scale(1.35) !important; }
+.card-deck:hover .card:nth-child(5):hover { transform: translateX(30px)   translateY(-20px) rotate(3deg)   scale(1.35) !important; }
+.card-deck:hover .card:nth-child(6):hover { transform: translateX(80px)   translateY(-15px) rotate(10deg)  scale(1.35) !important; }
+.card-deck:hover .card:nth-child(7):hover { transform: translateX(120px)  translateY(-5px) rotate(20deg)   scale(1.35) !important; }
+.card-deck:hover .card:nth-child(8):hover { transform: translateX(160px)  translateY(10px) rotate(30deg)   scale(1.35) !important; }
+
+
+/* --- Part 2: 游玩照片 (Gameplay Photos) --- */
+.gameplay-stack {
+  position: relative;
+  height: 240px;
+  width: 100%;
+  margin-top: -80px;
+}
+
+.gameplay-stack img {
+  position: absolute;
+  width: 300px;
+  height: auto;
+  border: 8px solid #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+  border-radius: 4px;
+}
+
+.gameplay-stack img:nth-child(1) {
+  left: 20px;
+  top: 10px;
+  transform: rotate(-3deg);
+  z-index: 1;
+}
+
+.gameplay-stack img:nth-child(2) {
+  right: 40px;
+  top: 0;
+  transform: rotate(2deg);
+  z-index: 2;
+}
+
+.gameplay-stack img:hover {
+  z-index: 10;
+  transform: scale(1.05) rotate(0deg);
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+  .sushi-visuals {
+    max-width: 100%;
+    margin-top: 40px;
+    gap: 80px;
+  }
+  
+  /* 手机端简单的扇形处理（防止溢出） */
+  .card-deck:hover .card:nth-child(1) { transform: translateX(-100px) rotate(-15deg); }
+  .card-deck:hover .card:nth-child(8) { transform: translateX(100px) rotate(15deg); }
+  
+  /* 手机端 Hover 也需要对应的修复 */
+  .card-deck:hover .card:nth-child(1):hover { transform: translateX(-100px) rotate(-15deg) scale(1.2) !important; }
+  .card-deck:hover .card:nth-child(8):hover { transform: translateX(100px) rotate(15deg) scale(1.2) !important; }
+}
