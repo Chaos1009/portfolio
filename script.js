@@ -48,36 +48,27 @@ function restoreMainView() {
 
 // Main function to switch view
 function switchView(targetId) {
-  // 1. 先隐藏所有相关部分
   projectsSection.style.display = 'none';
   projectSections.forEach(sec => sec.style.display = 'none');
 
   if (targetId === 'projects') {
-    // === 显示 Projects 列表 ===
     projectsSection.style.display = 'block';
     updateNavState('#projects');
-    
-    // ✅ 修复 1：这里原来是 offsetTop - 100，导致了偏移。
-    // 现在改为直接 offsetTop，配合 CSS 的 padding-top，背景图就会完美贴顶。
+
     const pSec = document.getElementById('projects');
     if (pSec) {
       window.scrollTo({ top: pSec.offsetTop, behavior: 'smooth' });
     }
-    
   } else {
-    // === 显示 Project Detail (详情页) ===
     const target = document.getElementById(targetId);
     if (target) {
       target.style.display = 'block';
-      updateNavState('#projects'); // 保持导航栏 Projects 高亮
-      
-      // ✅ 修复 2：这里原来是 top: 0，会导致点击详情页直接跳回网页最顶端(About)。
-      // 改为 target.offsetTop，这样页面会准确滚动到详情页的起始位置。
+      updateNavState('#projects');
+
       window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
     }
   }
 }
-
 
 // Update Nav highlight manually
 function updateNavState(hash) {
