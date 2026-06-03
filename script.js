@@ -41,6 +41,11 @@ const projectSections = document.querySelectorAll('.project-detail');
 const projectsSection = document.getElementById('projects');
 const backBtns = document.querySelectorAll('[data-back]');
 
+function restoreMainView() {
+  projectsSection.style.display = 'block';
+  projectSections.forEach(sec => sec.style.display = 'none');
+}
+
 // Main function to switch view
 function switchView(targetId) {
   // 1. 先隐藏所有相关部分
@@ -108,7 +113,12 @@ window.addEventListener('popstate', () => {
   if (hash && hash.startsWith('project-')) {
     switchView(hash);
   } else {
-    switchView('projects');
+    restoreMainView();
+    const target = hash ? document.getElementById(hash) : document.getElementById('about');
+    if (target) {
+      window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+      updateNavState(`#${target.id}`);
+    }
   }
 });
 
@@ -134,6 +144,7 @@ links.forEach(link => {
       // Normal scroll
       const target = document.querySelector(href);
       if (target) {
+        restoreMainView();
         window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
         history.pushState(null, '', href);
         updateNavState(href);
@@ -168,3 +179,46 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 mainSections.forEach(sec => observer.observe(sec));
+
+/* =========================
+   Image Lightbox
+   ========================= */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCaption = document.getElementById('caption');
+const closeLightbox = document.querySelector('.close-lightbox');
+const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
+
+function openLightbox(img) {
+  if (!lightbox || !lightboxImg) return;
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt || '';
+  if (lightboxCaption) lightboxCaption.textContent = img.alt || '';
+  lightbox.classList.add('is-open');
+  document.body.classList.add('lightbox-open');
+}
+
+function closeLightboxView() {
+  if (!lightbox || !lightboxImg) return;
+  lightbox.classList.remove('is-open');
+  document.body.classList.remove('lightbox-open');
+  lightboxImg.src = '';
+}
+
+lightboxTriggers.forEach(img => {
+  img.addEventListener('click', () => openLightbox(img));
+});
+
+if (closeLightbox) {
+  closeLightbox.addEventListener('click', closeLightboxView);
+}
+
+if (lightbox) {
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightboxView();
+  });
+}
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightboxView();
+});

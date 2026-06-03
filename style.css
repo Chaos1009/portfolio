@@ -38,6 +38,11 @@ ul {
   padding: 0 20px;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+}
+
 main section {
   min-height: 100vh;
   width: 100%;
@@ -53,9 +58,16 @@ main section {
   scroll-snap-stop: always; 
 }
 
+#about { order: 1; }
+#projects { order: 2; }
+.project-detail { order: 3; }
+#education { order: 4; }
+#experience { order: 5; }
+#contact { order: 6; }
+#cv { order: 7; }
+
 #about::before,
 #education::before,
-#publications::before,
 #projects::before,
 .project-detail::before {
   /* 确保这里是 top center */
@@ -197,7 +209,7 @@ main a:hover {
   position: relative;
   width: 100%;
   height: 400px;
-  margin-left: -300px; 
+  margin-left: -220px; 
 }
 
 .photo-stack img {
@@ -240,8 +252,8 @@ main a:hover {
   justify-self: end;
   max-width: 500px; /* ✅ 稍微加宽一点容器，容纳大号字体 */
   text-align: left;
-  transform: translateX(60px); 
-  margin-top: -120px;
+  transform: translateX(165px); 
+  margin-top: 45px;
 }
 
 /* ✅ 新增：针对 About 区域的超大标题 */
@@ -288,7 +300,7 @@ main a:hover {
 }
 
 /* =========================
-   Section: Education
+   Section: Academic
    ========================= */
 #education {
   /* ⭐ 关键修复 1：开启 Flex 垂直居中 */
@@ -436,23 +448,17 @@ main a:hover {
 }
 
 
-/* =========================
-   Section: Publications
-   ========================= */
-#publications::before {
-  content:'';
-  position: absolute;
-  inset: 0;
-  background-image: url('images/publication-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.4;
-  z-index: 0;
+.academic-publication {
+  margin-top: 36px;
 }
-#publications .container { position: relative; z-index: 1; }
+
+.academic-publication h3 {
+  color: #1f2a44;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
 
 .pub-card {
-  margin-top: 28px;
   background: rgba(255,255,255,0.55);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.65);
@@ -460,6 +466,13 @@ main a:hover {
   padding: 26px;
   box-shadow: 0 14px 38px rgba(0,0,0,0.14);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pub-card h4 {
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  color: #1f2a44;
 }
 
 .pub-card:hover {
@@ -652,7 +665,12 @@ main a:hover {
   z-index: 0;
 }
 
-.project-detail .container { position: relative; z-index: 1; max-width: 1000px; }
+.project-detail .container {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  padding-top: clamp(24px, 4vh, 56px);
+}
 
 /* Back Button */
 .back-btn {
@@ -680,6 +698,60 @@ main a:hover {
   transform: translateX(-4px);
   color: #5a78a6;
   text-decoration: underline;
+}
+
+.store-kicker {
+  margin-bottom: 10px;
+}
+
+.store-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 24px;
+}
+
+.store-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 10px 18px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.48), rgba(255,255,255,0.18));
+  border: 1px solid rgba(255,255,255,0.62);
+  color: #1f2a44;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.1;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.75),
+    inset 0 -1px 1px rgba(31,42,68,0.08),
+    0 12px 30px rgba(31,42,68,0.16);
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.store-link:hover {
+  background: linear-gradient(135deg, rgba(255,255,255,0.64), rgba(255,255,255,0.28));
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.85),
+    inset 0 -1px 1px rgba(31,42,68,0.1),
+    0 16px 36px rgba(31,42,68,0.2);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.store-link-secondary {
+  background: linear-gradient(135deg, rgba(255,255,255,0.32), rgba(255,255,255,0.14));
+  border-color: rgba(255,255,255,0.48);
+}
+
+.store-link-secondary:hover {
+  background: linear-gradient(135deg, rgba(255,255,255,0.56), rgba(255,255,255,0.22));
+  color: #1f2a44;
 }
 
 /* Detail Layout (Left text, Right Image) */
@@ -985,123 +1057,6 @@ main a:hover {
     text-align: left;
     display: flex;
     gap: 15px; /* 时间和地点在一行显示 */
-  }
-}
-
-/* =========================
-   Section: Skills (Grid Cards)
-   ========================= */
-
-#skills {
-  position: relative;
-  overflow: hidden;
-  /* 垂直居中，填满屏幕 */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* 别忘了背景图！复用之前的背景即可 */
-#skills::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('images/skills-bg.jpg'); /* 或者用新的 skills-bg.png */
-  background-size: cover;
-  background-position: center center !important;
-  opacity: 0.4;
-  z-index: 0;
-}
-
-#skills .container {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-}
-
-/* 2x2 网格布局 */
-.skills-grid {
-  display: grid;
-  /* 两个等宽列，自动换行 */
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px; /* 卡片之间的间距 */
-  margin-top: 40px;
-}
-
-/* 技能卡片样式 */
-.skill-card {
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.65);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 14px 38px rgba(0,0,0,0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  /* 让卡片看起来有一点高度 */
-  min-height: 220px;
-  display: flex;
-  flex-direction: column;
-}
-
-.skill-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
-  background: rgba(255,255,255,0.7);
-}
-
-.skill-card h3 {
-  font-family: 'Lora', serif;
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: #1f2a44;
-  border-bottom: 2px solid rgba(176,196,222,0.4); /* 标题下加条淡线装饰 */
-  padding-bottom: 10px;
-  display: inline-block;
-}
-
-/* 标签容器 */
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-/* 单个技能标签 */
-.skill-tags span {
-  font-family: 'Lora', serif; /* 保持字体统一 */
-  font-size: 15px;
-  padding: 8px 16px;
-  border-radius: 8px; /* 方圆角，比项目标签稍微方一点 */
-  
-  background: rgba(255,255,255,0.6);
-  border: 1px solid rgba(255,255,255,0.8);
-  color: #333;
-  font-weight: 600;
-  
-  transition: background 0.2s, transform 0.2s;
-  cursor: default;
-}
-
-/* 鼠标划过标签的小动效 */
-.skill-tags span:hover {
-  background: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  color: #000;
-}
-
-/* 响应式：手机上变成一列 */
-@media (max-width: 800px) {
-  .skills-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .skill-card {
-    min-height: auto;
-    padding: 24px;
   }
 }
 
@@ -1644,6 +1599,71 @@ main a:hover {
 .gameplay-stack img:hover {
   z-index: 10;
   transform: scale(1.05) rotate(0deg);
+}
+
+/* =========================
+   Image Lightbox
+   ========================= */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 28px 36px;
+  background: rgba(20, 24, 32, 0.42);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+.lightbox.is-open {
+  display: flex;
+}
+
+.lightbox-content {
+  max-width: min(92vw, 1100px);
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.48);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.58),
+    0 26px 70px rgba(0,0,0,0.32);
+}
+
+.close-lightbox {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.42);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.45), 0 12px 30px rgba(0,0,0,0.22);
+}
+
+#caption {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 18px;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+body.lightbox-open {
+  overflow: hidden;
 }
 
 /* 响应式 */
